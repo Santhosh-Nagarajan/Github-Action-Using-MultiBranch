@@ -3,7 +3,10 @@ name: Multi-Branch Workflow
 on:
   push:
     branches:
-      - '*'
+      - master
+      - react
+      - java
+      - python
 
 jobs:
   build:
