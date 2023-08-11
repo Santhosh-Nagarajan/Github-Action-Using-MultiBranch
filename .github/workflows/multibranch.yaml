@@ -18,4 +18,17 @@ jobs:
     - name: multibranch result
       run: |
         echo "helloword"
+        
+  java:
+    name: Deploy to Development Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: multibranch result
+        run: |
+          echo "helloword"
+        
+      
     
