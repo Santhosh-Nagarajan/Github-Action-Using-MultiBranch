@@ -1,45 +1,27 @@
-name: Multibranch Workflow
+name: Multi-Branch Workflow
 
 on:
   push:
     branches:
-      - master
-      - python/*
+      - '*'
 
 jobs:
-  build_and_test:
-    name: Build and Test
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      
-
-      - name: Install dependencies
-        run: echo "Hello World"
-
-      
-
-  deploy_to_staging:
-    name: Deploy to Staging
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/python/')
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Add deployment steps for staging here
-
-  deploy_to_production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Add deployment steps for production here
+    - name: Build and test
+      run: |
+        if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
+          echo "Building and testing for main branch"
+          # Add your build and test commands here
+        elif [[ "${{ github.ref }}" == "refs/heads/java" ]]; then
+          echo "Building and testing for develop branch"
+          # Add your build and test commands here
+        else
+          echo "Building and testing for other branches"
+          # Add your build and test commands here
+        fi
