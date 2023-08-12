@@ -39,7 +39,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Java Stage Successs
-        run: "Welcome to Java Branch"
+        run: echo "Welcome to Java Branch"
   
   python-staging:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2 
       - name: Python Stage Successs
-        run: "Welcome to Python Branch"
+        run: echo "Welcome to Python Branch"
         
   react-staging:
     runs-on: ubuntu-latest
@@ -61,4 +61,4 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: React Stage Successs
-        run: "Welcome to React Branch"
+        run: echo "Welcome to React Branch"
