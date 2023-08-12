@@ -33,4 +33,4 @@ jobs:
         if: ${{ github.ref == 'refs/heads/python' }}
         run: |
           echo "Running az commands for branch python"
-          # Add your actual Azure CLI commands here
+          # Add your actual Azure CLI commands heres
