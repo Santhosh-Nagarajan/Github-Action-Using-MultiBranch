@@ -1,36 +1,42 @@
-name: deploy
+name: Multi-Branch Workflow
+
 on:
   push:
-    branches: [java, python]
+    branches:
+      - master
+      - java
 
 jobs:
-  build-and-deploy:
+  build-and-test:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
-            
-      - name: Use Node.js
-        run: echo "Using Node.js"
-      
-      - name: echo
-        run: echo "Hello World"
-      
-      - name: 'Run az commands on branch 1'
-        if: ${{ github.ref == 'refs/heads/master' }}
-        run: |
-          echo "Running az commands for branch master"
-          # Add your actual Azure CLI commands here
-          
-      - name: 'Run az commands on branch 2'
-        if: ${{ github.ref == 'refs/heads/java' }}
-        run: |
-          echo "Running az commands for branch java"
-          # Add your actual Azure CLI commands here
-          
-      - name: 'Run az commands on branch 3'
-        if: ${{ github.ref == 'refs/heads/python' }}
-        run: |
-          echo "Running az commands for branch python"
-          # Add your actual Azure CLI commands heres
+      - name: Echo
+        run: echo "hello Word"
+     
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to Production
+        run: echo "suucess"
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/java'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to Staging
+        run: echo "failure"
