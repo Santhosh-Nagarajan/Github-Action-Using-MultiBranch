@@ -30,7 +30,7 @@ jobs:
         run: ls
           
 
-  deploy-staging:
+  java-staging:
     runs-on: ubuntu-latest
     needs: build-and-test
     if: github.ref == 'refs/heads/java'
@@ -38,3 +38,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+  
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/python'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2      
