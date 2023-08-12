@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - 'java/**'
+      - java
 
 jobs:
   build-and-test:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run Tests
         run: |
-          # Run your tests here
+          echo "Success"
 
   deploy-production:
     runs-on: ubuntu-latest
@@ -26,9 +26,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Deploy to Production
-        run: |
-          # Replace this with actual deployment steps to your production environment
+          
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -38,7 +36,3 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Deploy to Staging
-        run: |
-          # Replace this with actual deployment steps to your staging environment
