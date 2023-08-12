@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - java
+      - 'java/**'
 
 jobs:
   build-and-test:
