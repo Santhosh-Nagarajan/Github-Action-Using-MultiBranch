@@ -1,0 +1,49 @@
+name: Multi-Branch Workflow
+
+on:
+  push:
+    branches:
+      - master
+      - java
+      - python
+      - react
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Run Tests
+        run: |
+          echo "Success"
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: list
+        run: ls
+          
+
+  java-staging:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/java'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+  
+  python-staging:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/python'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2  
