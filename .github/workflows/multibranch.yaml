@@ -31,9 +31,9 @@ jobs:
           # Replace this with actual deployment steps to your production environment
 
   deploy-staging:
-   runs-on: ubuntu-latest
-   needs: build-and-test
-   if: github.ref == 'refs/heads/java'
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/java'
  
     steps:
       - name: Checkout Repository
