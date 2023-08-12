@@ -1,27 +1,26 @@
-name: Multi-Branch Workflow
-
+name: deploy
 on:
   push:
-    branches:
-      - '*'
+      branches: [ master, java, python ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Build and test
-      run: |
-        if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
-          echo "Building and testing for main branch"
-          # Add your build and test commands here
-        elif [[ "${{ github.ref }}" == "refs/heads/java" ]]; then
-          echo "Building and testing for develop branch"
-          # Add your build and test commands here
-        else
-          echo "Building and testing for other branches"
-          # Add your build and test commands here
-        fi
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+      - name: echo
+        run: echo "Hello World"
+      - name: 'Run az commands on branch 1'
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+           echo "Hello World"
+      - name: 'Run az commands on branch 2'
+        if: ${{ github.ref == 'refs/heads/java' }}
+        run: |
+            echo  "Hello World" 
+      - name: 'Run az commands on branch 3'
+        if: ${{ github.ref == 'refs/heads/python' }}
+        run: |
+           echo "hello World"
