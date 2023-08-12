@@ -6,6 +6,7 @@ on:
       - master
       - java
       - python
+      - react
 
 jobs:
   build-and-test:
@@ -17,7 +18,6 @@ jobs:
       - name: Run Tests
         run: |
           echo "Success"
-
   deploy-production:
     runs-on: ubuntu-latest
     needs: build-and-test
@@ -38,12 +38,27 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Java Stage Successs
+        run: "Welcome to Java Branch"
   
-  deploy-staging:
+  python-staging:
     runs-on: ubuntu-latest
     needs: build-and-test
     if: github.ref == 'refs/heads/python'
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2      
+        uses: actions/checkout@v2 
+      - name: Python Stage Successs
+        run: "Welcome to Python Branch"
+        
+  react-staging:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.ref == 'refs/heads/react'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: React Stage Successs
+        run: "Welcome to React Branch"
