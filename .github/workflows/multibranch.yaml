@@ -1,34 +1,45 @@
-name: Multi-Branch Workflow
+name: Multibranch Workflow
 
 on:
   push:
     branches:
       - master
-      - react
-      - java
-      - python
+      - python/*
 
 jobs:
-  build:
+  build_and_test:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: multibranch result
-      run: |
-        echo "helloword"
-        
-  java:
-    name: Deploy to Development Branch
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: multibranch result
-        run: |
-          echo "helloword"
-        
+
       
-    
+
+      - name: Install dependencies
+        run: echo "Hello World"
+
+      
+
+  deploy_to_staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/python/')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Add deployment steps for staging here
+
+  deploy_to_production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Add deployment steps for production here
